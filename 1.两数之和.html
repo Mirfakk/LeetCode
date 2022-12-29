@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /**
+     * 1.创建一个map
+     * 2.用for循环遍历nums数组
+     * 3.用target减nums[i]，以计算哪个数能够和当前的数字相加得到target
+     * 4.检查map里有没有这个数
+     *  如果有就返回结果，没有就将num[i]当做key，i当做value放入map
+     * 要检查map中有没有匹配的数，使用到map.has方法，检查map是否包含某个key
+     */
+    //参数是数组和目标值
+    var twoSum = function (nums, target) {
+      const map = new Map();//用于存放键值
+      for (let i = 0; i < nums.length; i++) {
+        //arguments用来定义哪一个数字跟当前数字相加能够得到target
+        const arguments = target - nums[i];
+        //检查map中有没有该数
+        if (map.has(arguments)) {
+          //如果有，返回当前的i和map中的value
+          return [map.get(arguments), i];
+        } else {
+          //如果没找到，map记录
+          //key：值  value:是下标，这与平时的相反
+          map.set(nums[i], i);
+        }
+      }
+      //最后什么都没找到，返回空数组
+      return [];
+    };
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>两数相加</title>
+</head>
+
+<body>
+  <script>
+    /*
+      用carry作为进位
+    */
+    var addTwoNumbers = function (l1, l2) {
+      let dummy = new ListNode();//链表节点
+      let curr = dummy;
+      let carry = 0;//处理进位变量
+
+      //只要l1或者l2不为null，就循环
+      while (l1 != null || l2 !== null) {
+        let sum = 0;
+        if (l1 != null) {
+          sum += l1.val;
+          l1 = l1.next;//进到下一位
+        }
+
+        if (l2 != null) {
+          sum += l2.val;
+          l2 = l2.next;//进到下一位
+        }
+
+        //检查carry是否进位
+        sum += carry;
+        //将新的值生成一个节点贴到curr的后面,相加后若是12，则将2贴上
+        curr.next = new ListNode(sum % 10);
+        //处理进位,若是12，结果为1
+        carry = Math.floor(sum / 10);
+        //然后将curr向前挪，准备下一个新节点
+        curr = curr.next;
+      }
+
+      //最后再检查，如果carry是0，直接返回，大于零意味着总结果还要进位
+      if (carry > 0) {
+        curr.next = new ListNode(carry);
+      }
+      return dummy.next;
+    };
+  </script>
+</body>
+
+</html>
